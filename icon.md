@@ -1,0 +1,22 @@
+<i class="ph-volleyball-bold"></i>
+<i class="ph-umbrella-bold"></i>
+<i class="ph-truck-bold"></i>
+<i class="ph-tree-bold"></i>
+<i class="ph-ruler-bold"></i>
+<i class="ph-rocket-bold"></i>
+<i class="ph-rainbow-bold"></i>
+<i class="ph-atom-bold"></i>
+<i class="ph-popcorn-bold"></i>
+<i class="ph-pinwheel-bold"></i>
+<i class="ph-parachute-bold"></i>
+<i class="ph-mountains-bold"></i>
+<i class="ph-backpack-bold"></i>
+<i class="ph-lightning-bold"></i>
+<i class="ph-ladder-bold"></i>
+<i class="ph-hard-drive-bold"></i>
+<i class="ph-hamburger-bold"></i>
+<i class="ph-fish-bold"></i>
+<i class="ph-dog-bold"></i>
+<i class="ph-confetti-bold"></i>
+
+cardArray = ['volleyball', 'umbrella', 'truck', 'tree', 'ruler', 'rocket', 'rainbow', 'atom', 'popcorn', 'pinwheel', 'parachute', 'mountains', 'backpack', 'lightning', 'ladder', 'hard-drive', 'hamburger', 'fish', 'dog', 'confetti']

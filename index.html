@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>翻牌配對 | Memory Match</title>
+
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="shortcut icon" type="image/png" href="./img/favicon.png" />
+
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Roboto:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- SCRIPTS -->
+    <script defer src="https://unpkg.com/phosphor-icons"></script>
+    <script defer src="scripts.js"></script>
+  </head>
+
+  <body>
+    <section class="section--header">
+      <div class="header--setting">
+        <div>
+          <button class="header--setting__button mode__button">
+            <i class="ph-moon-bold setting__icon"></i>
+            <p>&nbsp;&nbsp; Dark mode</p>
+          </button>
+        </div>
+
+        <div>
+          <button class="header--setting__button setting__button">
+            <i class="ph-gear-six-bold setting__icon"></i>
+            &nbsp;&nbsp; Setting
+          </button>
+        </div>
+        <div>
+          <button class="header--setting__button setting__button">
+            <i class="ph-circle-notch-bold setting__icon"></i>
+            &nbsp;&nbsp; Restart
+          </button>
+        </div>
+      </div>
+      </div>
+
+      <div class="header--title"><h1>Memory Match</h1></div>
+      <div class="header--setting"></div>
+    </section>
+
+    <section class="section--game container game__container">
+      <!-- <div class="game--card">
+        <div class="card--content">
+          <div class="card--front__back card--front">
+            <i class="ph-fingerprint-bold card--icon"></i>
+          </div>
+          <div class="card--front__back card--back">
+            <i class="ph-fingerprint-backpack card--icon"></i>
+          </div>
+        </div>
+      </div> -->
+    </section>
+
+    <section class="section--modal hidden">
+      <div class="modal--container container">
+        <button class="modal__close--btn"><i class="ph-x-bold"></i></button>
+        <div class="modal__setting--pairs">CARD PAIRS</div>
+        <div class="modal__setting--color">CHANGE COLOR</div>
+      </div>
+    </section>
+
+    <footer class="section--footer">
+      <ul class="footer--list">
+        <li class="footer--list__item">
+          Icons powered by &nbsp;
+          <a
+            class="footer--list__link"
+            href="https://phosphoricons.com/"
+            target="_blank"
+          >
+            <i class="footer--list__icon ph-phosphor-logo"></i>
+            <span>Phosphor Icons</span>
+          </a>
+        </li>
+
+        <li class="footer--list__item">
+          Game by &nbsp;
+          <a
+            class="footer--list__link"
+            href="https://github.com/apo1798/memory-match"
+            target="_blank"
+          >
+            <i class="footer--list__icon ph-github-logo"></i>
+            <span>apo1798</span>
+          </a>
+        </li>
+        <li class="footer--list__item"></li>
+      </ul>
+    </footer>
+
+    <!-- <i class="ph-smiley"></i>
+    <i class="ph-heart-fill" style="color: hotpink"></i>
+    <i class="ph-cube-thin"></i> -->
+  </body>
+</html>

@@ -1,0 +1,323 @@
+/* 
+--- 01 Typography System
+
+- Font sizes (px)
+10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52/ 62 / 74 / 86 / 98
+
+- Font weights:
+Default: 400
+Medium: 500
+Semi-bold: 600
+Bold: 700
+
+- Line Heights:
+Default: 1
+Small: 1.05 
+Medium: 1.2
+Paragraph: 1.6
+Large: 1.8
+
+- Letter Spacing
+-0.5px
+0.75px / 0.5px
+
+--- 02 Colors 
+
+- Primary: 
+- Tints:
+- Shades: 
+- Accents:
+- Greys: 
+
+
+--- 03 Images
+--- 04 Icons
+
+--- 05 Shadow
+  box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.075);
+·
+--- 06 Border-radius
+Default: 9px
+Medium: 11px
+
+--- 07 Whitespace
+
+- Spacing Systems (px)
+2 / 4 / 8 / 12 /16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
+*/
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  --background-color: #f8f9fa;
+  --text-color: #333;
+  --card-shadow: 0 1.2rem 2rem rgba(0, 0, 0, 0.15);
+  --footer-background-color: #333;
+  --footer-text-color: #f8f9fa;
+
+  font-family: 'Roboto', sans-serif;
+  min-height: 100vh;
+
+  /* for footer to stick at the bottom */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  position: relative;
+
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+body.dark {
+  --background-color: #333;
+  --text-color: #f8f9fa;
+  --card-shadow: 1rem 1.2rem 2rem rgba(255, 255, 255, 0.24);
+  --footer-background-color: #818181;
+  --footer-text-color: #333;
+}
+
+.section--header {
+  display: flex;
+  margin: 0.8rem 0;
+  /* width: 100%; */
+  justify-content: space-between;
+
+  /* for footer to stick at the bottom */
+  flex: 0 0 auto;
+}
+
+.header--setting {
+  padding-left: 5rem;
+  font-size: 1.6rem;
+  flex: 1 1 0;
+  align-self: center;
+  font-weight: 500;
+}
+
+.header--setting > * {
+  padding-bottom: 1.2rem;
+  color: inherit;
+}
+
+.header--title {
+  display: inline-block;
+  text-align: center;
+  font-size: 6.2rem;
+  font-family: 'Architects Daughter', cursive, sans-serif;
+  color: var(--text-color);
+}
+
+.header--setting__button {
+  font-family: inherit;
+  font-size: 1.6rem;
+  border: none;
+  cursor: pointer;
+  background: none;
+
+  display: flex;
+  align-items: center;
+
+  transition: all 0.3s;
+  color: inherit;
+}
+
+.setting__icon {
+  color: inherit;
+  font-size: 2.4rem;
+}
+
+.header--setting__button:hover {
+  transform: scale(1.15);
+  transition: all;
+}
+
+.header--setting__button:hover .setting__icon {
+  animation: 1.5s rotate360 1 linear;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 120rem;
+}
+
+.section--game {
+  /* for footer to stick at the bottom */
+  flex: 1 0 auto;
+}
+
+.game__container {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-gap: 3rem;
+  align-items: center;
+  justify-items: center;
+  padding: 0;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.game--card {
+  height: 17rem;
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+
+  position: relative;
+  filter: drop-shadow(var(--card-shadow));
+  cursor: pointer;
+}
+
+.card--content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: all 0.5s;
+}
+
+.game--card:hover {
+  transform: translateY(-1rem);
+}
+
+.game--card:hover .card--front i {
+  transform: scale(1.05);
+}
+
+.game--card.flipped .card--content {
+  transform: rotateY(180deg);
+}
+
+.card--front__back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: grid;
+  place-items: center;
+}
+
+.card--front {
+  background: linear-gradient(to left top, rgb(255, 217, 0), rgb(255, 231, 96));
+}
+
+.card--icon {
+  height: 50%;
+  width: 50%;
+  font-size: 9rem;
+}
+
+.card--back {
+  background: orangered;
+  transform: rotateY(180deg);
+}
+
+/* MODAL */
+.section--modal {
+  font-family: 'Architects Daughter', cursive, sans-serif;
+  font-size: 3.6rem;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+
+  z-index: 2;
+
+  backdrop-filter: blur(1.5px);
+}
+
+.section--modal.hidden {
+  display: none;
+  opacity: 0;
+}
+
+.modal--container {
+  position: absolute;
+  height: 70%;
+  width: 70%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: orangered;
+  border-radius: 3rem;
+  padding: 10rem;
+  display: grid;
+  gap: 5rem;
+  align-items: center;
+}
+
+.modal__close--btn {
+  position: absolute;
+  top: 1.5%;
+  right: 1.5%;
+  width: 5rem;
+  height: 5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 5rem;
+
+  display: flex;
+  align-items: center;
+}
+
+/* FOOTER */
+.section--footer {
+  height: 3rem;
+  background-color: var(--footer-background-color);
+
+  /* for footer to stick at the bottom */
+  flex: 0 0 auto;
+}
+
+.footer--list {
+  display: flex;
+  list-style: none;
+  justify-content: end;
+  align-items: center;
+  gap: 2rem;
+  height: inherit;
+
+  color: var(--footer-text-color);
+  font-size: 1.6rem;
+}
+
+.footer--list__item {
+  display: flex;
+}
+
+.footer--list__icon {
+  font-size: 1.8rem;
+}
+
+.footer--list__link {
+  display: flex;
+}
+
+.footer--list__item > a:link,
+.footer--list__item > a:visited {
+  text-decoration: none;
+  color: #ffd700;
+
+  transition: all 0.3s;
+}
+
+.footer--list__item > a:hover,
+.footer--list__item > a:active {
+  text-decoration: none;
+  color: #ffae00;
+}
+
+/* ANIMATION */
+@keyframes rotate360 {
+  to {
+    transform: rotate(360deg);
+  }
+}
