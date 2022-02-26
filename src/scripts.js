@@ -1,6 +1,7 @@
 'use strict';
 
 const state = {};
+let pairs = [];
 
 // prettier-ignore
 const iconArray = [ 'volleyball', 'umbrella', 'truck', 'tree', 'ruler', 'rocket', 'rainbow', 'atom', 'popcorn', 'pinwheel', 'parachute', 'mountains', 'backpack', 'lightning', 'ladder', 'hard-drive', 'hamburger', 'fish', 'dog', 'confetti'];
@@ -10,6 +11,7 @@ const body = document.querySelector('body');
 const modeBtn = document.querySelector('.mode__button');
 const settingBtn = document.querySelector('.setting__button');
 const modalCloseBtn = document.querySelector('.modal__close--btn');
+const restartBtn = document.querySelector('.restart__button');
 
 const gameSection = document.querySelector('.section--game');
 const modalSection = document.querySelector('.section--modal');
@@ -70,6 +72,11 @@ const generateCardMarkup = function (pairs) {
   return markup;
 };
 
+const renderGame = function () {
+  gameSection.innerHTML = '';
+  gameSection.insertAdjacentHTML('beforeend', generateCardMarkup(5));
+};
+
 /////////////////////////////
 // Handlers
 modeBtn.addEventListener('click', modeChange);
@@ -80,14 +87,41 @@ settingBtn.addEventListener('click', openModal);
   el.addEventListener('click', closeModal)
 );
 
+restartBtn.addEventListener('click', () => {
+  Array.from(gameSection.children).forEach(gameCard =>
+    gameCard.classList.remove('flipped')
+  );
+  setTimeout(init, 1000);
+});
+
 gameSection.addEventListener('click', function (e) {
   const card = e.target.closest('.game--card');
-  if (!card) return;
-  card.classList.toggle('flipped');
+
+  if (!card || card.classList.contains('flipped')) return;
+
+  card.classList.add('flipped');
+  pairs.push(card);
+
+  if (pairs.length === 2 && pairs[0].dataset.icon === pairs[1].dataset.icon) {
+    console.log('Pair matched!');
+    pairs = [];
+  } else if (
+    pairs.length === 2 &&
+    pairs[0].dataset.icon !== pairs[1].dataset.icon
+  ) {
+    setTimeout(() => {
+      pairs.forEach(card => {
+        console.log(card);
+        card.classList.remove('flipped');
+      });
+      pairs = [];
+    }, 1000);
+  }
 });
 
 function init() {
-  gameSection.insertAdjacentHTML('beforeend', generateCardMarkup(9));
+  // gameSection.insertAdjacentHTML('beforeend', generateCardMarkup(4));
+  renderGame();
 }
 init();
 
