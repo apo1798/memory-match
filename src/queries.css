@@ -43,10 +43,6 @@
     font-size: 62.5%;
   }
 
-  body {
-    background-color: orangered;
-  }
-
   .section--header {
     grid-template-columns: 1fr 1fr;
   }
