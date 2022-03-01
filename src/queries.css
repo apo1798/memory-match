@@ -78,7 +78,7 @@
 /**************************/
 /* BELOW 880px (Tablets) */
 /**************************/
-@media (max-width: 56em) {
+@media (max-width: 58em) {
   html {
     /* 8px / 16px = 0.5 = 50% */
     font-size: 50%;
@@ -108,10 +108,15 @@
 
   .modal--container {
     padding: 5rem 10rem;
+    font-size: 3.6rem;
+  }
+
+  .pairs__select {
+    padding: 1rem 1.6rem;
   }
 }
 
-@media (max-width: 44em) {
+@media (max-width: 46em) {
   .header--title h1 {
     font-size: 8.6rem;
   }
@@ -119,9 +124,20 @@
   .game__container {
     gap: 4rem;
   }
+
+  .modal--container {
+    padding: 3rem;
+  }
+
+  .modal__records {
+    font-size: 3rem;
+  }
 }
 
 @media (max-width: 34em) {
+  .section--header {
+    margin-top: 4rem;
+  }
   .header--title h1 {
     font-size: 6.2rem;
   }
@@ -145,7 +161,41 @@
   .card--icon {
     font-size: 7rem;
   }
+
   .container {
     padding: 0 2rem;
+  }
+
+  .modal--container {
+    padding: 3rem;
+    font-size: 3rem;
+  }
+
+  .modal__setting {
+    gap: 2rem;
+  }
+  .modal__close--btn {
+    top: 1%;
+    right: 0.5%;
+    font-size: 3rem;
+  }
+
+  .pairs__select {
+    font-size: 2rem;
+    padding: 1rem;
+  }
+
+  .modal__records {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 24em) {
+  .header--title h1 {
+    font-size: 5.2rem;
+  }
+
+  .card--icon {
+    font-size: 5.2rem;
   }
 }
