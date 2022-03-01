@@ -21,10 +21,6 @@
 /* BELOW 1104px (Landscape Tablets) */
 /**************************/
 @media (max-width: 69em) {
-  .section--header {
-    margin-top: 2rem;
-  }
-
   .header--title h1 {
     font-size: 7.4rem;
   }
