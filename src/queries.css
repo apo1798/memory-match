@@ -110,6 +110,10 @@
     padding: 5rem 10rem;
     font-size: 3.6rem;
   }
+  .record--table thead th,
+  .record--table tbody tr td {
+    padding: 1rem 1rem;
+  }
 
   .pairs__select {
     padding: 1rem 1.6rem;
