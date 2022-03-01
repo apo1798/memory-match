@@ -93,7 +93,6 @@ const renderGame = function (pairs) {
   gameSection.innerHTML = '';
   gameSection.insertAdjacentHTML('beforeend', generateCardMarkup(pairs));
   const gameCardElement = document.querySelectorAll('.game--card');
-  console.log(gameCardElement);
   gameCardElement.forEach(el => {
     el.style.flex = `0 0 ${Math.floor(100 / (pairs + 1))}%`;
     // el.style.flex = `0 0 14%`;
@@ -102,7 +101,6 @@ const renderGame = function (pairs) {
 };
 
 const startTimer = function () {
-  headerTimer.textContent = '';
   const start = Date.now();
   const timer = setInterval(() => {
     const secondPass = Math.floor((Date.now() - start) / 1000);
@@ -175,7 +173,7 @@ gameSection.addEventListener('click', function (e) {
       pairs = [];
     }, 1000);
   }
-  if (headerTimer.textContent === '00:00') startTimer();
+  if (headerTimer.textContent === '') startTimer();
 });
 
 function init() {
