@@ -7,6 +7,7 @@
     <title>翻牌配對 | Memory Match</title>
 
     <link rel="stylesheet" href="./src/styles.css" />
+    <link rel="stylesheet" href="./src/queries.css" />
     <link rel="shortcut icon" type="image/png" href="./img/favicon.png" />
 
     <!-- GOOGLE FONTS -->
@@ -24,7 +25,7 @@
 
   <body>
     <section class="section--header">
-      <div class="header--side">
+      <div class="header--side header--side__left">
         <span>
           <button class="header--setting mode__button header--button">
             <i class="ph-moon-bold setting__icon"></i>
@@ -34,7 +35,7 @@
         <span>
           <button class="header--setting setting__button header--button">
             <i class="ph-gear-six-bold setting__icon"></i>
-            Setting
+            Setting & Records
           </button>
         </span>
         <span>
@@ -47,13 +48,13 @@
 
       <div class="header--title"><h1>Memory Match</h1></div>
 
-      <div class="header--side">
+      <div class="header--side header--side__right">
         <div class="header--setting">
           <i class="ph-clock-bold setting__icon"></i>
           Timer
           <span class="header--timer"></span>
         </div>
-        <div class="header--message">asdsa</div>
+        <div class="header--setting header--message">Match the cards!</div>
       </div>
     </section>
 
@@ -76,10 +77,56 @@
         <div class="modal__setting">
           <label for="pairs">Card Pairs</label>
           <select class="pairs__select" name="pairs" id="pairs">
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
             <option value="5">5</option>
             <option value="6">6</option>
             <option value="7">7</option>
           </select>
+        </div>
+        <div class="modal__records">
+          <table class="record--table">
+            <thead>
+              <tr>
+                <th>Number</th>
+                <th>Pairs</th>
+                <th>Time</th>
+              </tr>
+            </thead>
+            <tbody class="records--content">
+              <!-- <tr>
+                <td>Game 1</td>
+                <td>6 pairs</td>
+                <td>00:40</td>
+              </tr>
+              <tr>
+                <td>Game 1</td>
+                <td>6 pairs</td>
+                <td>00:40</td>
+              </tr>
+              <tr>
+                <td>Game 1</td>
+                <td>6 pairs</td>
+                <td>00:40</td>
+              </tr>
+              <tr>
+                <td>Game 1</td>
+                <td>6 pairs</td>
+                <td>00:40</td>
+              </tr>
+              <tr>
+                <td>Game 1</td>
+                <td>6 pairs</td>
+                <td>00:40</td>
+              </tr>
+              <tr>
+                <td>Game 1</td>
+                <td>6 pairs</td>
+                <td>00:40</td>
+              </tr> -->
+            </tbody>
+          </table>
         </div>
       </div>
     </section>
@@ -89,7 +136,7 @@
     <footer class="section--footer">
       <ul class="footer--list">
         <li class="footer--list__item">
-          Icons powered by &nbsp;
+          Icons from
           <a
             class="footer--list__link"
             href="https://phosphoricons.com/"
@@ -101,7 +148,7 @@
         </li>
 
         <li class="footer--list__item">
-          Game by &nbsp;
+          Game by
           <a
             class="footer--list__link"
             href="https://github.com/apo1798/memory-match"
@@ -114,9 +161,5 @@
         <li class="footer--list__item"></li>
       </ul>
     </footer>
-
-    <!-- <i class="ph-smiley"></i>
-    <i class="ph-heart-fill" style="color: hotpink"></i>
-    <i class="ph-cube-thin"></i> -->
   </body>
 </html>

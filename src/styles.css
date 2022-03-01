@@ -45,7 +45,6 @@ Medium: 11px
 - Spacing Systems (px)
 2 / 4 / 8 / 12 /16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
 */
-
 * {
   padding: 0;
   margin: 0;
@@ -67,7 +66,7 @@ body {
   --card-shadow: 0 1.2rem 2rem rgba(0, 0, 0, 0.25);
   --footer-background-color: #333;
   --footer-text-color: #f8f9fa;
-  --modal-card-background-color: #ff4500;
+  --modal-card-background-color: #099268;
 
   font-family: 'Roboto', sans-serif;
   min-height: 100vh;
@@ -94,7 +93,8 @@ body.dark {
 }
 
 .section--header {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 60% 1fr;
   margin: 0.8rem 0;
   /* width: 100%; */
   justify-content: space-between;
@@ -111,7 +111,17 @@ body.dark {
   padding: 0 2rem 0 5rem;
   font-size: 1.6rem;
   flex: 1 1 0;
-  font-weight: 500;
+  /* font-weight: 500; */
+}
+
+.header--side__left {
+  align-items: start;
+  padding: 0 2rem 0 5rem;
+}
+
+.header--side__right {
+  align-items: flex-end;
+  padding: 0 5rem 0 2rem;
 }
 
 .header--side > * {
@@ -140,6 +150,7 @@ body.dark {
 }
 
 .header--button {
+  text-align: left;
   cursor: pointer;
   transition: all 0.3s;
   color: inherit;
@@ -162,7 +173,8 @@ body.dark {
 
 .container {
   margin: 0 auto;
-  max-width: 120rem;
+  padding: 0 8rem;
+  max-width: 130rem;
 }
 
 .section--game {
@@ -171,27 +183,26 @@ body.dark {
 }
 
 .game__container {
-  display: flex;
+  /* display: flex;
   justify-content: center;
   align-items: center;
   gap: 3rem;
-  flex-wrap: wrap;
+  flex-wrap: wrap; */
 
-  /* display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-gap: 3rem;
+  display: grid;
+  gap: 5rem;
+  grid-template-columns: repeat(5, 1fr);
   align-items: center;
-  justify-items: center; */
-  padding: 0;
+
   width: 100%;
   margin-bottom: 2rem;
 }
 
 .game--card {
-  /* The size should be flexible */
-  flex: 0 0 17%;
-  height: 17rem;
+  min-height: 16rem;
+  max-height: 18rem;
   width: 100%;
+  height: 100%;
   border-radius: 20px;
   overflow: hidden;
 
@@ -290,10 +301,11 @@ body.dark {
 
   background-color: var(--modal-card-background-color);
   border-radius: 3rem;
-  padding: 10rem 15rem;
-  display: grid;
-  gap: 5rem;
+  padding: 10rem 10rem;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  gap: 5rem;
 }
 
 .modal__close--btn {
@@ -315,6 +327,36 @@ body.dark {
   display: flex;
   align-items: center;
   gap: 5rem;
+}
+
+.modal__records {
+  font-size: 3rem;
+  overflow-y: auto;
+  flex: 1 1 0;
+}
+
+.record--table {
+  border-collapse: collapse;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.record--table thead tr {
+  background-color: var(--background-color);
+}
+
+.record--table thead th,
+.record--table tbody tr td {
+  text-align: left;
+  padding: 1rem 5rem;
+}
+
+.record--table tbody tr:nth-of-type(odd) {
+  color: #f8f9fa;
+}
+
+.record--table tbody tr:nth-of-type(even) {
+  background: var(--card-background);
 }
 
 /* FOOTER */
@@ -340,6 +382,7 @@ body.dark {
 
 .footer--list__item {
   display: flex;
+  gap: 0.8rem;
 }
 
 .footer--list__icon {

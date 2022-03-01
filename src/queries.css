@@ -1,0 +1,155 @@
+/**************************/
+/* BELOW 1168px (Smaller desktops) */
+/**************************/
+@media (max-width: 73em) {
+  .header--side__left,
+  .header--side__right {
+    padding: 0 2rem;
+  }
+
+  .record--table thead th,
+  .record--table tbody tr td {
+    padding: 1rem 2rem;
+  }
+
+  .modal--container {
+    padding: 5rem 5rem;
+  }
+}
+
+/**************************/
+/* BELOW 1104px (Landscape Tablets) */
+/**************************/
+@media (max-width: 69em) {
+  .section--header {
+    margin-top: 2rem;
+  }
+
+  .header--title h1 {
+    font-size: 7.4rem;
+  }
+
+  .game__container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/**************************/
+/* BELOW Width -> 928px; Height -> 1376px (Tablets Portrait) */
+/**************************/
+
+@media (max-width: 58em) and (max-height: 86em) {
+  html {
+    font-size: 62.5%;
+  }
+
+  body {
+    background-color: orangered;
+  }
+
+  .section--header {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .header--side {
+    align-items: start;
+    margin: 0 auto;
+    font-size: 3.6rem;
+  }
+
+  .header--title {
+    grid-row: 1;
+    grid-column: 1/-1;
+    margin-bottom: 1rem;
+  }
+
+  .header--title h1 {
+    font-size: 9.8rem;
+  }
+
+  .header--side {
+    grid-row: 2;
+  }
+  .header--side > * {
+    margin-bottom: 1.6rem;
+  }
+
+  .header--setting {
+    font-size: 2rem;
+  }
+}
+
+/**************************/
+/* BELOW 880px (Tablets) */
+/**************************/
+@media (max-width: 56em) {
+  html {
+    /* 8px / 16px = 0.5 = 50% */
+    font-size: 50%;
+  }
+
+  .section--header {
+    margin-top: 1rem;
+  }
+
+  .section--header {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .header--side {
+    align-items: start;
+    margin: 0 auto;
+  }
+
+  .container {
+    padding: 0 4rem;
+  }
+
+  .header--title h1 {
+    grid-row: 1;
+    grid-column: 1/-1;
+  }
+
+  .modal--container {
+    padding: 5rem 10rem;
+  }
+}
+
+@media (max-width: 44em) {
+  .header--title h1 {
+    font-size: 8.6rem;
+  }
+
+  .game__container {
+    gap: 4rem;
+  }
+}
+
+@media (max-width: 34em) {
+  .header--title h1 {
+    font-size: 6.2rem;
+  }
+
+  .header--setting {
+    font-size: 1.6rem;
+  }
+
+  .header--side > * {
+    margin-bottom: 1.2rem;
+  }
+
+  .game__container {
+    gap: 2.4rem;
+  }
+
+  .game--card {
+    min-height: 6rem;
+    max-height: 13rem;
+  }
+  .card--icon {
+    font-size: 7rem;
+  }
+  .container {
+    padding: 0 2rem;
+  }
+}

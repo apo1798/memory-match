@@ -1,6 +1,6 @@
 'use strict';
 
-const state = { pairs: 2, pairsHaveMatched: 0 };
+let state = { pairs: 2, pairsHaveMatched: 0, darkMode: false, records: [] };
 let pairs = [];
 
 // prettier-ignore
@@ -20,6 +20,8 @@ const gameSection = document.querySelector('.section--game');
 const modalSection = document.querySelector('.section--modal');
 const modalFilter = document.querySelector('.modal__filter');
 const headerTimer = document.querySelector('.header--timer');
+const headerMessage = document.querySelector('.header--message');
+const recordsContent = document.querySelector('.records--content');
 
 const pairsSelect = document.querySelector('.pairs__select');
 
@@ -28,7 +30,9 @@ pairsSelect.addEventListener('change', () => {
   const newPairsNum = +pairsSelect.options[pairsSelect.selectedIndex].text;
   if (newPairsNum === state.pairs) return;
   state.pairs = newPairsNum;
-  renderGame(newPairsNum);
+  saveLocalStorage();
+  init();
+  // renderGame(newPairsNum);
 });
 
 // Testing line
@@ -38,12 +42,14 @@ console.log('Welcome to my application!');
 // Helpers
 const modeChange = function () {
   body.classList.toggle('dark');
+  state.darkMode = !state.darkMode;
 
   body.classList.contains('dark')
     ? (modeBtn.innerHTML =
         '<i class="ph-sun-bold setting__icon"></i>  Light mode')
     : (modeBtn.innerHTML =
         '<i class="ph-moon-bold setting__icon"></i>  Dark mode');
+  saveLocalStorage();
 };
 
 const openModal = function () {
@@ -55,19 +61,19 @@ const closeModal = function () {
   modalFilter.classList.add('hidden');
 };
 
-const generateCardMarkup = function (pairs) {
+const generateCardMarkup = function () {
   const iconArrayCopy = [...iconArray];
   let gameIconArray = [];
 
   // Choosing the icons for cards
-  [...Array(+pairs)].forEach(_ => {
+  [...Array(+state.pairs)].forEach(_ => {
     const randomNum = Math.floor(Math.random() * iconArrayCopy.length);
     gameIconArray.push(...iconArrayCopy.splice(randomNum, 1));
   });
 
   // Rendering the markup
   gameIconArray = [...gameIconArray, ...gameIconArray];
-  const markup = [...Array(+pairs * 2)]
+  const markup = [...Array(+state.pairs * 2)]
     .map(_ => {
       const randomNum = Math.floor(Math.random() * gameIconArray.length);
       const icon = gameIconArray[randomNum];
@@ -89,15 +95,15 @@ const generateCardMarkup = function (pairs) {
   return markup;
 };
 
-const renderGame = function (pairs) {
+const renderGame = function () {
   gameSection.innerHTML = '';
-  gameSection.insertAdjacentHTML('beforeend', generateCardMarkup(pairs));
-  const gameCardElement = document.querySelectorAll('.game--card');
-  gameCardElement.forEach(el => {
-    el.style.flex = `0 0 ${Math.floor(100 / (pairs + 1))}%`;
-    // el.style.flex = `0 0 14%`;
-    console.log(`0 0 ${+Math.floor(100 / (pairs + 1)) + 1}`);
-  });
+  gameSection.insertAdjacentHTML('beforeend', generateCardMarkup(state.pairs));
+  // const gameCardElement = document.querySelectorAll('.game--card');
+  // gameCardElement.forEach(el => {
+  //   el.style.flex = `0 0 ${Math.floor(100 / (state.pairs + 1))}%`;
+  //   // el.style.flex = `0 0 14%`;
+  //   console.log(`0 0 ${+Math.floor(100 / (state.pairs + 1)) + 1}`);
+  // });
 };
 
 const startTimer = function () {
@@ -113,11 +119,34 @@ const startTimer = function () {
           )}`;
     headerTimer.textContent = timeDisplay;
 
-    if (state.pairsHaveMatched === state.pairs /*|| #TODO */) {
-      console.log('HELLLO');
+    if (state.pairsHaveMatched === state.pairs) {
+      state.records.push([state.pairsHaveMatched, headerTimer.textContent]);
+      saveLocalStorage();
       clearInterval(timer);
+      headerMessage.innerHTML =
+        '<i class="ph-confetti-bold setting__icon"></i> Stage clear ^_^';
+      rednerRecordsContent();
     }
   }, 100);
+};
+
+const rednerRecordsContent = function () {
+  if (!state.records) return;
+  const markup = state.records
+    .map((record, i) => {
+      const [pairs, time] = [record[0], record[1]];
+      return `
+    <tr>
+      <td>Game ${i + 1}</td>
+      <td>${pairs} pairs</td>
+      <td>${time}</td>
+    </tr>
+  `;
+    })
+    .join('');
+  recordsContent.innerHTML = '';
+
+  recordsContent.insertAdjacentHTML('afterbegin', markup);
 };
 
 /////////////////////////////
@@ -171,14 +200,45 @@ gameSection.addEventListener('click', function (e) {
         card.classList.remove('flipped');
       });
       pairs = [];
-    }, 1000);
+    }, 500);
   }
   if (headerTimer.textContent === '') startTimer();
 });
 
-function init() {
-  renderGame(state.pairs);
-}
+const saveLocalStorage = function () {
+  localStorage.setItem('state', JSON.stringify(state));
+};
+
+const getLocalStorage = function () {
+  const data = JSON.parse(localStorage.getItem('state'));
+
+  if (!data) return;
+  state = data;
+};
+
+const init = function () {
+  // Read the previous setting
+  getLocalStorage();
+
+  // Switch to the previous theme
+  if (state.darkMode) body.classList.add('dark');
+
+  // Select the previous card pairs
+  Array.from(pairsSelect.options)
+    .find(el => +el.textContent === state.pairs)
+    .setAttribute('selected', 'selected');
+
+  renderGame();
+  headerTimer.textContent = '';
+
+  // Clear existing timer
+  window.clearInterval(1);
+  headerMessage.textContent = 'Match the cards!';
+  state.pairsHaveMatched = 0;
+
+  // Render records content
+  rednerRecordsContent();
+};
 init();
 
 // #BUG #TODO
