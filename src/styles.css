@@ -57,11 +57,17 @@ html {
 }
 
 body {
-  --background-color: #f8f9fa;
+  --background-color: #eeeeee;
   --text-color: #333;
-  --card-shadow: 0 1.2rem 2rem rgba(0, 0, 0, 0.15);
+  --card-background: linear-gradient(
+    to left top,
+    rgb(255, 208, 0),
+    rgb(236, 200, 39)
+  );
+  --card-shadow: 0 1.2rem 2rem rgba(0, 0, 0, 0.25);
   --footer-background-color: #333;
   --footer-text-color: #f8f9fa;
+  --modal-card-background-color: #ff4500;
 
   font-family: 'Roboto', sans-serif;
   min-height: 100vh;
@@ -81,8 +87,10 @@ body.dark {
   --background-color: #333;
   --text-color: #f8f9fa;
   --card-shadow: 1rem 1.2rem 2rem rgba(255, 255, 255, 0.24);
+  --card-background: linear-gradient(to left top, #364fc7, #1e3a8a);
   --footer-background-color: #818181;
   --footer-text-color: #333;
+  --modal-card-background-color: #107c6e;
 }
 
 .section--header {
@@ -95,16 +103,19 @@ body.dark {
   flex: 0 0 auto;
 }
 
-.header--setting {
-  padding-left: 5rem;
+.header--side {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 0 2rem 0 5rem;
   font-size: 1.6rem;
   flex: 1 1 0;
-  align-self: center;
   font-weight: 500;
 }
 
-.header--setting > * {
-  padding-bottom: 1.2rem;
+.header--side > * {
+  margin-bottom: 1.2rem;
   color: inherit;
 }
 
@@ -116,16 +127,20 @@ body.dark {
   color: var(--text-color);
 }
 
-.header--setting__button {
+.header--setting {
   font-family: inherit;
   font-size: 1.6rem;
   border: none;
-  cursor: pointer;
+
   background: none;
 
   display: flex;
   align-items: center;
+  gap: 1rem;
+}
 
+.header--button {
+  cursor: pointer;
   transition: all 0.3s;
   color: inherit;
 }
@@ -135,12 +150,13 @@ body.dark {
   font-size: 2.4rem;
 }
 
-.header--setting__button:hover {
+.header--button:hover {
   transform: scale(1.15);
+  transform-origin: center;
   transition: all;
 }
 
-.header--setting__button:hover .setting__icon {
+.header--button:hover > .setting__icon {
   animation: 1.5s rotate360 1 linear;
 }
 
@@ -155,17 +171,25 @@ body.dark {
 }
 
 .game__container {
-  display: grid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+
+  /* display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-gap: 3rem;
   align-items: center;
-  justify-items: center;
+  justify-items: center; */
   padding: 0;
   width: 100%;
   margin-bottom: 2rem;
 }
 
 .game--card {
+  /* The size should be flexible */
+  flex: 0 0 17%;
   height: 17rem;
   width: 100%;
   border-radius: 20px;
@@ -206,48 +230,67 @@ body.dark {
 }
 
 .card--front {
-  background: linear-gradient(to left top, rgb(255, 217, 0), rgb(255, 231, 96));
+  background: var(--card-background);
 }
 
 .card--icon {
   height: 50%;
   width: 50%;
   font-size: 9rem;
+  justify-content: center;
 }
 
 .card--back {
-  background: orangered;
+  background: var(--modal-card-background-color);
   transform: rotateY(180deg);
 }
 
 /* MODAL */
 .section--modal {
   font-family: 'Architects Daughter', cursive, sans-serif;
-  font-size: 3.6rem;
+  font-size: 5.2rem;
+  position: absolute;
+  height: 70%;
+  width: 70%;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  z-index: 10;
+}
+
+.modal__filter {
   position: absolute;
   height: 100%;
   width: 100%;
-
-  z-index: 2;
-
-  backdrop-filter: blur(1.5px);
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
 }
 
-.section--modal.hidden {
+.pairs__select {
+  font-family: 'Roboto', sans-serif;
+  padding: 2rem 3.6rem;
+  font-size: 2.4rem;
+  border-radius: 1rem;
+  background-color: var(--background-color);
+  color: inherit;
+  border: 0;
+}
+
+.hidden {
   display: none;
   opacity: 0;
 }
 
 .modal--container {
-  position: absolute;
-  height: 70%;
-  width: 70%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: orangered;
+  position: relative;
+  height: 100%;
+  width: 100%;
+
+  background-color: var(--modal-card-background-color);
   border-radius: 3rem;
-  padding: 10rem;
+  padding: 10rem 15rem;
   display: grid;
   gap: 5rem;
   align-items: center;
@@ -255,8 +298,8 @@ body.dark {
 
 .modal__close--btn {
   position: absolute;
-  top: 1.5%;
-  right: 1.5%;
+  top: 3%;
+  right: 2.5%;
   width: 5rem;
   height: 5rem;
   background: none;
@@ -266,6 +309,12 @@ body.dark {
 
   display: flex;
   align-items: center;
+}
+
+.modal__setting {
+  display: flex;
+  align-items: center;
+  gap: 5rem;
 }
 
 /* FOOTER */

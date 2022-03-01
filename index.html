@@ -24,31 +24,37 @@
 
   <body>
     <section class="section--header">
-      <div class="header--setting">
-        <div>
-          <button class="header--setting__button mode__button">
+      <div class="header--side">
+        <span>
+          <button class="header--setting mode__button header--button">
             <i class="ph-moon-bold setting__icon"></i>
-            <p>&nbsp;&nbsp; Dark mode</p>
+            <p>Dark mode</p>
           </button>
-        </div>
-
-        <div>
-          <button class="header--setting__button setting__button">
+        </span>
+        <span>
+          <button class="header--setting setting__button header--button">
             <i class="ph-gear-six-bold setting__icon"></i>
-            &nbsp;&nbsp; Setting
+            Setting
           </button>
-        </div>
-        <div>
-          <button class="header--setting__button restart__button">
+        </span>
+        <span>
+          <button class="header--setting restart__button header--button">
             <i class="ph-circle-notch-bold setting__icon"></i>
-            &nbsp;&nbsp; Restart
+            Restart
           </button>
-        </div>
-      </div>
+        </span>
       </div>
 
       <div class="header--title"><h1>Memory Match</h1></div>
-      <div class="header--setting"></div>
+
+      <div class="header--side">
+        <div class="header--setting">
+          <i class="ph-clock-bold setting__icon"></i>
+          Timer
+          <span class="header--timer">00:00</span>
+        </div>
+        <div class="header--message">asdsa</div>
+      </div>
     </section>
 
     <section class="section--game container game__container">
@@ -67,10 +73,18 @@
     <section class="section--modal hidden">
       <div class="modal--container container">
         <button class="modal__close--btn"><i class="ph-x-bold"></i></button>
-        <div class="modal__setting--pairs">CARD PAIRS</div>
-        <div class="modal__setting--color">CHANGE COLOR</div>
+        <div class="modal__setting">
+          <label for="pairs">Card Pairs</label>
+          <select class="pairs__select" name="pairs" id="pairs">
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+          </select>
+        </div>
       </div>
     </section>
+
+    <div class="modal__filter hidden"></div>
 
     <footer class="section--footer">
       <ul class="footer--list">

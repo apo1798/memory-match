@@ -1,6 +1,6 @@
 'use strict';
 
-const state = {};
+const state = { pairs: 2, pairsHaveMatched: 0 };
 let pairs = [];
 
 // prettier-ignore
@@ -13,8 +13,23 @@ const settingBtn = document.querySelector('.setting__button');
 const modalCloseBtn = document.querySelector('.modal__close--btn');
 const restartBtn = document.querySelector('.restart__button');
 
+// #BUG => NULL
+// const gameCardElement = document.querySelectorAll('.game--card');
+
 const gameSection = document.querySelector('.section--game');
 const modalSection = document.querySelector('.section--modal');
+const modalFilter = document.querySelector('.modal__filter');
+const headerTimer = document.querySelector('.header--timer');
+
+const pairsSelect = document.querySelector('.pairs__select');
+
+// TESTING!!
+pairsSelect.addEventListener('change', () => {
+  const newPairsNum = +pairsSelect.options[pairsSelect.selectedIndex].text;
+  if (newPairsNum === state.pairs) return;
+  state.pairs = newPairsNum;
+  renderGame(newPairsNum);
+});
 
 // Testing line
 console.log('Welcome to my application!');
@@ -26,16 +41,18 @@ const modeChange = function () {
 
   body.classList.contains('dark')
     ? (modeBtn.innerHTML =
-        '<i class="ph-sun-bold setting__icon"></i> &nbsp;&nbsp; Light mode')
+        '<i class="ph-sun-bold setting__icon"></i>  Light mode')
     : (modeBtn.innerHTML =
-        '<i class="ph-moon-bold setting__icon"></i> &nbsp;&nbsp; Dark mode');
+        '<i class="ph-moon-bold setting__icon"></i>  Dark mode');
 };
 
 const openModal = function () {
   modalSection.classList.remove('hidden');
+  modalFilter.classList.remove('hidden');
 };
 const closeModal = function () {
   modalSection.classList.add('hidden');
+  modalFilter.classList.add('hidden');
 };
 
 const generateCardMarkup = function (pairs) {
@@ -72,20 +89,55 @@ const generateCardMarkup = function (pairs) {
   return markup;
 };
 
-const renderGame = function () {
+const renderGame = function (pairs) {
   gameSection.innerHTML = '';
-  gameSection.insertAdjacentHTML('beforeend', generateCardMarkup(5));
+  gameSection.insertAdjacentHTML('beforeend', generateCardMarkup(pairs));
+  const gameCardElement = document.querySelectorAll('.game--card');
+  console.log(gameCardElement);
+  gameCardElement.forEach(el => {
+    el.style.flex = `0 0 ${Math.floor(100 / (pairs + 1))}%`;
+    // el.style.flex = `0 0 14%`;
+    console.log(`0 0 ${+Math.floor(100 / (pairs + 1)) + 1}`);
+  });
 };
 
+const startTimer = function () {
+  headerTimer.textContent = '';
+  const start = Date.now();
+  const timer = setInterval(() => {
+    const secondPass = Math.floor((Date.now() - start) / 1000);
+    const timeDisplay =
+      secondPass < 60
+        ? `00:${((secondPass % 60) + '').padStart(2, '0')}`
+        : `${Math.floor(secondPass / 60)}:${((secondPass % 60) + '').padStart(
+            2,
+            '0'
+          )}`;
+    headerTimer.textContent = timeDisplay;
+
+    if (state.pairsHaveMatched === state.pairs /*|| #TODO */) {
+      console.log('HELLLO');
+      clearInterval(timer);
+    }
+  }, 100);
+};
+
+/////////////////////////////
 /////////////////////////////
 // Handlers
 modeBtn.addEventListener('click', modeChange);
 
 settingBtn.addEventListener('click', openModal);
 
-[modalSection, modalCloseBtn].forEach(el =>
+[modalFilter, modalCloseBtn].forEach(el =>
   el.addEventListener('click', closeModal)
 );
+
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape' && !modalSection.classList.contains('hidden')) {
+    closeModal();
+  }
+});
 
 restartBtn.addEventListener('click', () => {
   Array.from(gameSection.children).forEach(gameCard =>
@@ -97,31 +149,37 @@ restartBtn.addEventListener('click', () => {
 gameSection.addEventListener('click', function (e) {
   const card = e.target.closest('.game--card');
 
-  if (!card || card.classList.contains('flipped')) return;
+  if (!card || card.classList.contains('checked' || pairs.length === 1)) return;
+  if (card.classList.contains('flipped')) {
+    card.classList.remove('flipped');
+    return;
+  }
 
   card.classList.add('flipped');
   pairs.push(card);
 
   if (pairs.length === 2 && pairs[0].dataset.icon === pairs[1].dataset.icon) {
-    console.log('Pair matched!');
+    pairs.forEach(card => {
+      card.classList.add('checked');
+    });
     pairs = [];
+    state.pairsHaveMatched += 1;
   } else if (
     pairs.length === 2 &&
     pairs[0].dataset.icon !== pairs[1].dataset.icon
   ) {
     setTimeout(() => {
       pairs.forEach(card => {
-        console.log(card);
         card.classList.remove('flipped');
       });
       pairs = [];
     }, 1000);
   }
+  if (headerTimer.textContent === '00:00') startTimer();
 });
 
 function init() {
-  // gameSection.insertAdjacentHTML('beforeend', generateCardMarkup(4));
-  renderGame();
+  renderGame(state.pairs);
 }
 init();
 
@@ -130,3 +188,9 @@ init();
 //   console.log(e.code);
 //   if (e.code === 'Escape') closeModal();
 // });
+
+//#TODO
+// 1. change event on the modal
+// 2. color picker for the card
+// 3. Best scores
+// 4. Time used
