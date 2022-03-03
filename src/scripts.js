@@ -272,8 +272,6 @@ class App {
 }
 
 /////////////////////////////
-///// To evoke our app //////
-
 // Rendering new game
 const init = function () {
   const app = new App();
@@ -281,7 +279,6 @@ const init = function () {
   // Event handlers
   modeBtn.addEventListener('click', app._changeMode.bind(app));
   settingBtn.addEventListener('click', app._openModal);
-  // settingBtn.addEventListener('click', app._stopTimer);
   restartBtn.addEventListener('click', app._restartGame.bind(app));
 
   [(modalFilter, modalCloseBtn)].forEach(el =>
