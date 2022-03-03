@@ -1,6 +1,6 @@
 # Memory Match
 
-### Memory match is an old but never out-of-fashion mini game. Match the same card to prove our brain is still young!
+### Memory match is an old but never out-of-fashion mini game. Match the same card to prove our brains are still young!
 
 Go and visit -> https://apo1798.github.io/memory-match/
 
