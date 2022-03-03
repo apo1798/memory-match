@@ -239,6 +239,7 @@ body.dark {
   position: absolute;
   width: 100%;
   height: 100%;
+  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   display: grid;
   place-items: center;
@@ -376,7 +377,7 @@ body.dark {
 .footer--list {
   display: flex;
   list-style: none;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
   gap: 2rem;
   height: inherit;
@@ -387,6 +388,7 @@ body.dark {
 
 .footer--list__item {
   display: flex;
+  align-items: center;
   gap: 0.8rem;
 }
 
@@ -396,6 +398,7 @@ body.dark {
 
 .footer--list__link {
   display: flex;
+  align-items: center;
 }
 
 .footer--list__item > a:link,
